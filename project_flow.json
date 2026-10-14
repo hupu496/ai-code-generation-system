@@ -1,0 +1,179 @@
+{
+  "project_name": "LocalLeadsProject",
+  "description": "Local leads management system with Gmail integration, SQLite database, and web UI",
+  "version": "1.0.0",
+  "output_dir": "D:\\ComsysProject\\output",
+  "github_repo": {
+    "auto_create": true,
+    "unique_name_check": true,
+    "prefix": "localleads-"
+  },
+  "modules": [
+    {
+      "id": "module_01",
+      "name": "database_setup",
+      "description": "SQLite database initialization with leads table schema",
+      "dependencies": [],
+      "task_type": "backend",
+      "files": [
+        "leads.db",
+        "map_project_db.json"
+      ],
+      "tests": [
+        "test_db_connection",
+        "test_table_creation",
+        "test_crud_operations"
+      ]
+    },
+    {
+      "id": "module_02",
+      "name": "models",
+      "description": "Data models for leads, contacts, and interactions",
+      "dependencies": ["module_01"],
+      "task_type": "backend",
+      "files": [
+        "models/__init__.py",
+        "models/lead.py",
+        "models/contact.py",
+        "models/interaction.py"
+      ],
+      "tests": [
+        "test_lead_model",
+        "test_contact_model",
+        "test_interaction_model"
+      ]
+    },
+    {
+      "id": "module_03",
+      "name": "gmail_responder",
+      "description": "Gmail API integration for lead responses and email automation",
+      "dependencies": ["module_01", "module_02"],
+      "task_type": "backend",
+      "files": [
+        "gmail_responder.py",
+        "gmail_auth.py",
+        "email_templates.py"
+      ],
+      "tests": [
+        "test_gmail_auth",
+        "test_send_email",
+        "test_email_template_rendering"
+      ]
+    },
+    {
+      "id": "module_04",
+      "name": "remote_installer",
+      "description": "Remote installation and deployment utilities",
+      "dependencies": ["module_01"],
+      "task_type": "backend",
+      "files": [
+        "remote_installer.py",
+        "deployment_config.py"
+      ],
+      "tests": [
+        "test_installer_config",
+        "test_remote_connection"
+      ]
+    },
+    {
+      "id": "module_05",
+      "name": "api_routes",
+      "description": "REST API endpoints for leads management",
+      "dependencies": ["module_02", "module_03"],
+      "task_type": "backend",
+      "files": [
+        "api/__init__.py",
+        "api/routes/leads.py",
+        "api/routes/contacts.py",
+        "api/routes/interactions.py",
+        "api/routes/email.py"
+      ],
+      "tests": [
+        "test_leads_crud_api",
+        "test_contacts_crud_api",
+        "test_email_api"
+      ]
+    },
+    {
+      "id": "module_06",
+      "name": "frontend_ui",
+      "description": "Web UI with dashboard, leads table, and email composer",
+      "dependencies": ["module_05"],
+      "task_type": "frontend_finishing",
+      "files": [
+        "templates/index.html",
+        "templates/dashboard.html",
+        "templates/leads_list.html",
+        "templates/email_composer.html",
+        "static/css/style.css",
+        "static/js/app.js",
+        "static/js/leads.js",
+        "static/js/email.js"
+      ],
+      "tests": [
+        "test_ui_load",
+        "test_leads_table_render",
+        "test_email_composer"
+      ]
+    },
+    {
+      "id": "module_07",
+      "name": "main_app",
+      "description": "Main Flask application entry point with configuration",
+      "dependencies": ["module_01", "module_05", "module_06"],
+      "task_type": "backend",
+      "files": [
+        "app.py",
+        "config.py",
+        "extensions.py"
+      ],
+      "tests": [
+        "test_app_startup",
+        "test_config_loading",
+        "test_routes_registration"
+      ]
+    },
+    {
+      "id": "module_08",
+      "name": "integration_testing",
+      "description": "Full system integration testing",
+      "dependencies": ["module_01", "module_02", "module_03", "module_04", "module_05", "module_06", "module_07"],
+      "task_type": "testing",
+      "files": [
+        "tests/integration/test_full_flow.py",
+        "tests/integration/test_email_flow.py",
+        "tests/integration/test_api_flow.py"
+      ],
+      "tests": [
+        "test_complete_lead_flow",
+        "test_email_automation_flow",
+        "test_api_integration"
+      ]
+    }
+  ],
+  "ai_routing": {
+    "default_chain": ["opencode", "copilot", "chatgpt", "deepseek", "gemini", "nemotron-3-ultra", "nemotron-3.5-lightning", "big-pickle", "muse-spark-1.3", "ling-3.0-flash-fin"],
+    "specialist_routing": {
+      "frontend_finishing": "deepseek",
+      "photo_poster_design": "gemini",
+      "heavy_reasoning": "nemotron-3-ultra",
+      "fast_inference": "nemotron-3.5-lightning",
+      "creative_coding": "big-pickle",
+      "general_coding": "muse-spark-1.3",
+      "fintech_coding": "ling-3.0-flash-fin"
+    },
+    "fallback_enabled": true,
+    "max_retries_per_provider": 3
+  },
+  "testing": {
+    "unit_tests": true,
+    "integration_tests": true,
+    "coverage_threshold": 80,
+    "test_runner": "pytest"
+  },
+  "deployment": {
+    "local_path": "D:\\ComsysProject\\output",
+    "github_push": true,
+    "docker_support": false
+  }
+}

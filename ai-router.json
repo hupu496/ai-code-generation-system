@@ -1,0 +1,94 @@
+{
+  "chain": [
+    {
+      "name": "opencode",
+      "provider": "openai",
+      "baseURL": "https://api.groq.com/openai/v1",
+      "model": "llama-3.3-70b-versatile",
+      "apiKey": "${GROQ_API_KEY}",
+      "role": "Main - Unlimited free tier, no Cloudflare limits"
+    },
+    {
+      "name": "copilot",
+      "provider": "openai",
+      "baseURL": "https://models.inference.ai.azure.com",
+      "model": "gpt-4o",
+      "apiKey": "${GITHUB_TOKEN}",
+      "role": "Backup 1 - GitHub Models free"
+    },
+    {
+      "name": "chatgpt",
+      "provider": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "model": "gpt-4o-mini",
+      "apiKey": "${OPENAI_API_KEY}",
+      "role": "Backup 2 - OpenAI direct"
+    },
+    {
+      "name": "deepseek",
+      "provider": "openai",
+      "baseURL": "https://api.deepseek.com/v1",
+      "model": "deepseek-chat",
+      "apiKey": "${DEEPSEEK_API_KEY}",
+      "role": "Frontend Specialist - Direct DeepSeek API"
+    },
+    {
+      "name": "gemini",
+      "provider": "google",
+      "model": "gemini-2.0-flash",
+      "apiKey": "${GEMINI_API_KEY}",
+      "role": "Photo/Poster Designer - Google AI Studio free tier"
+    },
+    {
+      "name": "nemotron-3-ultra",
+      "provider": "openai",
+      "baseURL": "https://integrate.api.nvidia.com/v1",
+      "model": "nvidia/nemotron-3-ultra",
+      "apiKey": "${NVIDIA_API_KEY}",
+      "role": "Heavy Reasoning - NVIDIA NIM free tier, no rate limits"
+    },
+    {
+      "name": "nemotron-3.5-lightning",
+      "provider": "openai",
+      "baseURL": "https://integrate.api.nvidia.com/v1",
+      "model": "nvidia/nemotron-3.5-lightning",
+      "apiKey": "${NVIDIA_API_KEY}",
+      "role": "Fast Inference - NVIDIA NIM free tier"
+    },
+    {
+      "name": "big-pickle",
+      "provider": "openai",
+      "baseURL": "https://api.together.xyz/v1",
+      "model": "bigpickle/bigpickle",
+      "apiKey": "${TOGETHER_API_KEY}",
+      "role": "Creative Coding - Together AI free tier"
+    },
+    {
+      "name": "muse-spark-1.3",
+      "provider": "openai",
+      "baseURL": "https://api-inference.huggingface.co/v1",
+      "model": "muse/muse-spark-1.3",
+      "apiKey": "${HUGGINGFACE_API_KEY}",
+      "role": "Code Generation - HuggingFace Inference API free"
+    },
+    {
+      "name": "ling-3.0-flash-fin",
+      "provider": "openai",
+      "baseURL": "https://api-inference.huggingface.co/v1",
+      "model": "ling/ling-3.0-flash-fin",
+      "apiKey": "${HUGGINGFACE_API_KEY}",
+      "role": "FinTech Coding - HuggingFace Inference API free"
+    }
+  ],
+  "loop": true,
+  "rules": {
+    "frontend_finishing": "deepseek",
+    "photo_poster_design": "gemini",
+    "heavy_reasoning": "nemotron-3-ultra",
+    "fast_inference": "nemotron-3.5-lightning",
+    "creative_coding": "big-pickle",
+    "general_coding": "muse-spark-1.3",
+    "fintech_coding": "ling-3.0-flash-fin",
+    "main_chain": ["opencode", "copilot", "chatgpt", "deepseek", "gemini", "nemotron-3-ultra", "nemotron-3.5-lightning", "big-pickle", "muse-spark-1.3", "ling-3.0-flash-fin"]
+  }
+}
